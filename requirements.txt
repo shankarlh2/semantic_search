@@ -10,3 +10,7 @@ openai
 requests
 beautifulsoup4
 sentence-transformers
+streamlit
+faiss-cpu
+nltk
+
