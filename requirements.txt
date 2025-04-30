@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pydantic
+pandas
+numpy
+joblib
+scikit-learn
+imblearn
+openai
+requests
+beautifulsoup4
+sentence-transformers
