@@ -24,8 +24,11 @@ def preprocess_text(text):
 @st.cache_resource
 def load_assets():
     model = SentenceTransformer("all-distilroberta-v1")
-    df = pd.read_csv("finetune_data.csv")
-    titles = df.iloc[:, 0].dropna().astype(str).tolist()
+
+    # Hardcoded CSV path and title column extraction
+    df = pd.read_csv("data-1745943143329.csv")  # assumes it's in the working directory
+    titles = df["title"].dropna().astype(str).tolist()
+
     cleaned_titles = [preprocess_text(title) for title in titles]
     embeddings = model.encode(cleaned_titles, show_progress_bar=False).astype("float32")
     faiss.normalize_L2(embeddings)
@@ -55,3 +58,4 @@ if query:
     st.markdown("### 🔍 Top Matches:")
     for i, idx in enumerate(indices[0]):
         st.write(f"{i+1}. {titles[idx]}  \n*Score: {1 - distances[0][i]:.4f}*")
+
